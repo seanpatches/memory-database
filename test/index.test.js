@@ -66,5 +66,10 @@ describe('create memory class', () => {
     expect(memory.store).toEqual({});
   });
 
+  it('return empty on find, if no memories in store', () => {
+    const memory = new MemoryDatabase();
+    expect(memory.find()).toEqual([]);
+  });
+
 
 });
