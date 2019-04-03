@@ -12,4 +12,12 @@ describe('create memory class', () => {
     const copy = memory.create(obj);
     expect(copy.name).toEqual('Superman');
   });
+
+  it('find by id', () => {
+    const memory = new MemoryDatabase();
+    const obj = { name: 'Superman' };
+    const copy = memory.create(obj);
+    const id = copy._id;
+    expect(memory.findById(id)).toEqual({ ...copy });
+  });
 });
