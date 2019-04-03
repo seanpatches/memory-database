@@ -43,5 +43,28 @@ describe('create memory class', () => {
     expect(memory.findByIdAndUpdate(dogId, newDog)).toEqual({ ...newDog, _id: dogId });
   });
 
+  it('find by id and delete', () => {
+    const memory = new MemoryDatabase();
+    const dog = memory.create({ name: 'bob', age: 5 });
+    const dogId = dog._id;
+    expect(memory.findByIdAndDelete(dogId)).toEqual({ ...dog });
+    expect(memory.findById(dogId)).toEqual(null);
+  });
+
+  it('delete all keys', () => {
+    const memory = new MemoryDatabase();
+    const dog = memory.create({ name: 'bob', age: 5 });
+    const dogId = dog._id;
+    expect(memory.findByIdAndDelete(dogId)).toEqual({ ...dog });
+    expect(memory.findById(dogId)).toEqual(null);
+  });
+
+  it('deletes everything in this.store', () => {
+    const memory = new MemoryDatabase();
+    memory.create({ name: 'bob', age: 5 });
+    memory.drop();
+    expect(memory.store).toEqual({});
+  });
+
 
 });
