@@ -34,6 +34,14 @@ describe('create memory class', () => {
     const cat = memory.create({ name: 'kitty', age: 24 });
     expect(memory.find()).toEqual([{ ...dog }, { ...cat }]);
   });
-
   
+  it('updates object by id', () => {
+    const memory = new MemoryDatabase();
+    const dog = memory.create({ name: 'bob', age: 5 });
+    const dogId = dog._id;
+    const newDog = ({ name: 'kitty', age: 24 });
+    expect(memory.findByIdAndUpdate(dogId, newDog)).toEqual({ ...newDog, _id: dogId });
+  });
+
+
 });
